@@ -24,6 +24,6 @@ Vývojová deska ESP32-CAM, WiFi + Bluetooth s kamerovým modulem
 ## Zdroje
 [Inspirace pro projekt](https://www.youtube.com/watch?v=tyY7AN132Xs) 
 [Návod na předělání servo motorů pro možnost plného otáčení](https://www.youtube.com/watch?v=I-sZ5HWsGZU) 
-[Tutoriál pro práci s kamerovým modulem](https://www.youtube.com/watch?v=Sb08leLWOgA) 
-[Tutoriál pro práci s kamerovým modulem](hhttps://www.youtube.com/watch?v=hSr557hppwY) 
+[Tutoriál pro práci s kamerovým modulem](https://www.youtube.com/watch?v=Sb08leLWOgA)
+[Tutoriál pro práci s kamerovým modulem](hhttps://www.youtube.com/watch?v=hSr557hppwY)
 
