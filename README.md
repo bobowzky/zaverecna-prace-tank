@@ -9,16 +9,21 @@ autor: Robin Harazim
 
 
 ## Cíle
-- Vytvořit korbu tanku s pásy tak, aby je šlo ovládat pomocí webové aplikace.
-  - Vytvořit vlastní kód (optimální) pro pohyb jednotlivých pásů.
-- Přidat a zprovoznit kameru pro lepší orientaci a ovládání vozidla.
-- Vytvořit plně otočnou věž. 
-  - Zprovoznit dělo tak, aby jej šlo horizontálně sklápět. 
-- Vytvořit samostatnou webovou aplikaci pro ovládání vozidla.
-  - Zprovoznit na webu kameru, ovládání pásu a otáčení věže.  
+- Sestavit korbu tanku z vytiskutého materiálu.
+  - Zapojit servo motory, zdroj energie.
+- Vytvořit kód pro ovládání pásů vozidla
+- Vytvořit webovou aplikaci pro ovládání vozidla.
+  - Zprovoznit kameru pro lepší ovládání a přehled.
+- Vytvořit vlastní ovladač jako alternativní možnost ovládání.
+- Vymodelovat a vytisknout zbytek vozidla.
+- Zprovoznit otáčení věže.  
 
 ## Technologie
-- Něco určitě použiju
+2x Plastové micro servo SG90 9g, 180°
+Vývojová deska ESP32-CAM, WiFi + Bluetooth s kamerovým modulem
 ## Zdroje
-[Důležitý zdroj pro práci](https://github.com/it-2001)
+[Inspirace pro projekt](https://www.youtube.com/watch?v=tyY7AN132Xs) 
+[Návod na předělání servo motorů pro možnost plného otáčení](https://www.youtube.com/watch?v=I-sZ5HWsGZU) 
+[Tutoriál pro práci s kamerovým modulem](https://www.youtube.com/watch?v=Sb08leLWOgA) 
+[Tutoriál pro práci s kamerovým modulem](hhttps://www.youtube.com/watch?v=hSr557hppwY) 
 
