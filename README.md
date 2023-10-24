@@ -19,8 +19,10 @@ autor: Robin Harazim
 - Zprovoznit otáčení věže.  
 
 ## Technologie
-2x Plastové micro servo SG90 9g, 180°
-Vývojová deska ESP32-CAM, WiFi + Bluetooth s kamerovým modulem
+- Vývojová deska ESP32-CAM, WiFi + Bluetooth s kamerovým modulem
+- H-můstek L9110S, dvoumotorový modul 
+- 2x Plastové micro servo SG90 9g, 180°
+- 
 ## Zdroje
 - [Databáze modelů](https://www.thingiverse.com/thing:4238136)
 - [Inspirace pro projekt](https://www.youtube.com/watch?v=tyY7AN132Xs)
