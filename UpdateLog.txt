@@ -1,2 +1,3 @@
 2. 10. 2023 - Obdržel jsem základní součástky pro projekt jako, vytisknuté součásti podvozku, nebo Servo motory.
 3. 10. 2023 - Úprava servo motorů. Motory se nyní otáčejí o 360° oproti předchozím 180°. Úprava GitHub dokumentace projektu.
+5. 11. 2023 Úspěšně se mi podařilo zprovoznit chod motorů jak dopředu tak dozadu.
