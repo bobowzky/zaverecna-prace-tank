@@ -30,4 +30,5 @@ autor: Robin Harazim
 - [Tutoriál pro práci s H-můstkem](https://www.youtube.com/watch?v=E2sTbpFsvXI)
 - [Tutoriál pro práci s kamerovým modulem](https://www.youtube.com/watch?v=Sb08leLWOgA)
 - [Tutoriál pro práci s kamerovým modulem](https://www.youtube.com/watch?v=hSr557hppwY)
+- [Tutoriál pro práci s kamerovým modulem](https://www.youtube.com/watch?v=RCtVxZnjPmY)
 
