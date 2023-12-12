@@ -7,7 +7,7 @@
 #include <sstream>
 
 #define LIGHT_PIN 4
-/*Slouží k nastavení parametrů PWM (Pulse Width Modulation) pro kontrolu různých funkcí, jako je řízení rychlosti nebo intenzity světla*/
+/*Slouží k nastavení parametrů PWM (Pulse Width Modulation) pro kontrolu různých funkcí, jako je řízení rychlosti nebo intenzity světla u kamery*/
 const int PWMFreq = 1000; /* 1 KHz */
 const int PWMResolution = 8;
 const int PWMSpeedChannel = 2;
@@ -42,52 +42,7 @@ uint32_t cameraClientId = 0;
 
 //Webová stránka
 const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
-<!DOCTYPE html>
-<html>
-  <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  
-  </head>
-  <body class="noselect" align="center" style="background-color:white">
-     
-    <!--h2 style="color: teal;text-align:center;">Wi-Fi Camera &#128663; Control</h2-->
-    
-    <table id="mainTable" style="width:400px;margin:auto;table-layout:fixed" CELLSPACING=10>
-      <tr>
-        <img id="cameraImage" src="" style="width:1280px;height:px"></td>
-      </tr>        
-    </table>
-  
-    <script>
-      var webSocketCameraUrl = "ws:\/\/" + window.location.hostname + "/Camera";     
-      var websocketCamera;
-      
-      function initCameraWebSocket() 
-      {
-        websocketCamera = new WebSocket(webSocketCameraUrl);
-        websocketCamera.binaryType = 'blob';
-        websocketCamera.onopen    = function(event){};
-        websocketCamera.onclose   = function(event){setTimeout(initCameraWebSocket, 2000);};
-        websocketCamera.onmessage = function(event)
-        {
-          var imageId = document.getElementById("cameraImage");
-          imageId.src = URL.createObjectURL(event.data);
-        };
-      }
-      
-      function initWebSocket() 
-      {
-        initCameraWebSocket ();
-      }
 
-    
-      window.onload = initWebSocket;
-      document.getElementById("mainTable").addEventListener("touchend", function(event){
-        event.preventDefault()
-      });      
-    </script>
-  </body>    
-</html>
 )HTMLHOMEPAGE";
 
 
