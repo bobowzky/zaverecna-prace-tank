@@ -7,15 +7,15 @@
 #include <sstream>
 
 struct MOTOR_PINS
-{
+{ 
   int pinIN1;
-  int pinIN2;
+  int pinIN2;    
 };
 
-std::vector<MOTOR_PINS> motorPins =
+std::vector<MOTOR_PINS> motorPins = 
 {
-  {13, 15},  // RIGHT_MOTOR Pins (IN1, IN2)
-  {14, 2},   // LEFT_MOTOR  Pins (IN3, IN4)
+  {13, 15},  //RIGHT_MOTOR Pins (EnA, IN1, IN2)
+  {14, 2},  //LEFT_MOTOR  Pins (EnB, IN3, IN4)
 };
 #define LIGHT_PIN 4
 
@@ -33,7 +33,6 @@ std::vector<MOTOR_PINS> motorPins =
 
 const int PWMFreq = 1000; /* 1 KHz */
 const int PWMResolution = 8;
-const int PWMSpeedChannel = 2;
 const int PWMLightChannel = 3;
 
 //Camera related constants
@@ -54,8 +53,8 @@ const int PWMLightChannel = 3;
 #define HREF_GPIO_NUM     23
 #define PCLK_GPIO_NUM     22
 
-const char* ssid     = "TankWiFi";
-const char* password = "boboTank14";
+const char* ssid     = "MyWiFiCar";
+const char* password = "12345678";
 
 AsyncWebServer server(80);
 AsyncWebSocket wsCamera("/Camera");
@@ -143,17 +142,17 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
       </tr> 
       <tr>
         <td></td>
-        <td class="button" ontouchstart='sendButtonInput("MoveCar","1")' ontouchend='sendButtonInput("MoveCar","0")'><span class="arrows" >&#8679;</span></td>
+        <td class="button" onmousedown='sendButtonInput("MoveCar","1")' onmouseup='sendButtonInput("MoveCar","0")'><span class="arrows" >&#8679;</span></td>
         <td></td>
       </tr>
       <tr>
-        <td class="button" ontouchstart='sendButtonInput("MoveCar","3")' ontouchend='sendButtonInput("MoveCar","0")'><span class="arrows" >&#8678;</span></td>
+        <td class="button" onmousedown='sendButtonInput("MoveCar","3")' onmouseup='sendButtonInput("MoveCar","0")'><span class="arrows" >&#8678;</span></td>
         <td class="button"></td>    
-        <td class="button" ontouchstart='sendButtonInput("MoveCar","4")' ontouchend='sendButtonInput("MoveCar","0")'><span class="arrows" >&#8680;</span></td>
+        <td class="button" onmousedown='sendButtonInput("MoveCar","4")' onmouseup='sendButtonInput("MoveCar","0")'><span class="arrows" >&#8680;</span></td>
       </tr>
       <tr>
         <td></td>
-        <td class="button" ontouchstart='sendButtonInput("MoveCar","2")' ontouchend='sendButtonInput("MoveCar","0")'><span class="arrows" >&#8681;</span></td>
+        <td class="button" onmousedown='sendButtonInput("MoveCar","2")' onmouseup='sendButtonInput("MoveCar","0")'><span class="arrows" >&#8681;</span></td>
         <td></td>
       </tr>
       <tr/><tr/>       
@@ -211,7 +210,7 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
       }
     
       window.onload = initWebSocket;
-      document.getElementById("mainTable").addEventListener("touchend", function(event){
+      document.getElementById("mainTable").addEventListener("onmouseup", function(event){
         event.preventDefault()
       });      
     </script>
@@ -225,17 +224,17 @@ void rotateMotor(int motorNumber, int motorDirection)
   if (motorDirection == FORWARD)
   {
     digitalWrite(motorPins[motorNumber].pinIN1, HIGH);
-    digitalWrite(motorPins[motorNumber].pinIN2, LOW);
+    digitalWrite(motorPins[motorNumber].pinIN2, LOW);    
   }
   else if (motorDirection == BACKWARD)
   {
     digitalWrite(motorPins[motorNumber].pinIN1, LOW);
-    digitalWrite(motorPins[motorNumber].pinIN2, HIGH);
+    digitalWrite(motorPins[motorNumber].pinIN2, HIGH);     
   }
   else
   {
     digitalWrite(motorPins[motorNumber].pinIN1, LOW);
-    digitalWrite(motorPins[motorNumber].pinIN2, LOW);
+    digitalWrite(motorPins[motorNumber].pinIN2, LOW);       
   }
 }
 
@@ -441,21 +440,17 @@ void sendCameraPicture()
 
 void setUpPinModes()
 {
-  // Set up PWM
-  ledcSetup(PWMSpeedChannel, PWMFreq, PWMResolution);
+  //Set up PWM
   ledcSetup(PWMLightChannel, PWMFreq, PWMResolution);
-
+      
   for (int i = 0; i < motorPins.size(); i++)
-  {
+  {  
     pinMode(motorPins[i].pinIN1, OUTPUT);
-    pinMode(motorPins[i].pinIN2, OUTPUT);
-
-    /* Attach the PWM Channel to the motor enb Pin */
-    ledcAttachPin(motorPins[i].pinIN1, PWMSpeedChannel);
+    pinMode(motorPins[i].pinIN2, OUTPUT);  
   }
   moveCar(STOP);
 
-  pinMode(LIGHT_PIN, OUTPUT);
+  pinMode(LIGHT_PIN, OUTPUT);    
   ledcAttachPin(LIGHT_PIN, PWMLightChannel);
 }
 
