@@ -1,11 +1,6 @@
-% ŠABLONA PRO PSANÍ ZÁVĚREČNÉ STUDIJNÍ PRÁCE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Autor: Jakub Dokulil (kubadokulil99@gmail.com)
-% Tato šablona byla vytvořena tak, aby pomocí ní mohli v systému LaTeX soutěžící sázet své práce a zároveň odpovídala požadavkům na formátování vyplývajícím z wordové šablony umístěné na webu soc.cz.
-%
+
 \documentclass[12pt, a4paper,
-%oneside,      %% -- odkomentujte, pokud chcete svou práci mít pouze jednostrannou, mezera pro hřbet pak automaticky bude pouze na levé straně
-twoside,        %% -- pro oboustranné práce, mezera pro hřbet následně střídá strany.
+oneside
 openany
 ]{report}
 
@@ -87,128 +82,40 @@ openany
 
 \usepackage{listings}
 \usepackage{xcolor}
-
-\renewcommand{\lstlistingname}{Kód}% Listing -> Algorithm
-\renewcommand{\lstlistlistingname}{Seznam programových kódů}% List of Listings -> List of Algorithms
-
-%% Definice 
-\lstdefinelanguage{JavaScript}{
-	morekeywords=[1]{break, continue, delete, else, for, function, if, in,
-		new, return, this, typeof, var, void, while, with},
-	% Literals, primitive types, and reference types.
-	morekeywords=[2]{false, null, true, boolean, number, undefined,
-		Array, Boolean, Date, Math, Number, String, Object},
-	% Built-ins.
-	morekeywords=[3]{eval, parseInt, parseFloat, escape, unescape},
-	sensitive,
-	morecomment=[s]{/*}{*/},
-	morecomment=[l]//,
-	morecomment=[s]{/**}{*/}, % JavaDoc style comments
-	morestring=[b]',
-	morestring=[b]"
-}[keywords, comments, strings]
+\usepackage{varwidth}
+\usepackage{ragged2e}
 
 
-\lstdefinelanguage[ECMAScript2015]{JavaScript}[]{JavaScript}{
-	morekeywords=[1]{await, async, case, catch, class, const, default, do,
-		enum, export, extends, finally, from, implements, import, instanceof,
-		let, static, super, switch, throw, try},
-	morestring=[b]` % Interpolation strings.
-}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
-\lstalias[]{ES6}[ECMAScript2015]{JavaScript}
-
-% Nastavení barev
-% Requires package: color.
-\definecolor{mediumgray}{rgb}{0.3, 0.4, 0.4}
-\definecolor{mediumblue}{rgb}{0.0, 0.0, 0.8}
-\definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
-\definecolor{darkviolet}{rgb}{0.58, 0.0, 0.83}
-\definecolor{royalblue}{rgb}{0.25, 0.41, 0.88}
-\definecolor{crimson}{rgb}{0.86, 0.8, 0.24}
-
-% Nastavení pro Python
-\lstdefinestyle{Python}{
-	language=Python,
-	backgroundcolor=\color{white},
-	basicstyle=\ttfamily,
-	breakatwhitespace=false,
-	breaklines=false,
-	captionpos=b,
-	columns=fullflexible,
-	commentstyle=\color{mediumgray}\upshape,
-	emph={},
-	emphstyle=\color{crimson},
-	extendedchars=true,  % requires inputenc
-	fontadjust=true,
-	frame=single,
-	identifierstyle=\color{black},
-	keepspaces=true,
-	keywordstyle=\color{mediumblue},
-	keywordstyle={[2]\color{darkviolet}},
-	keywordstyle={[3]\color{royalblue}},
-	literate=%
-	{á}{{\'a}}1 {č}{{\v{c}}}1 {ď}{{\v{d}}}1 {é}{{\'e}}1 {ě}{{\v{e}}}1
-	{í}{{\'i}}1 {ň}{{\v{n}}}1 {ó}{{\'o}}1 {ř}{{\v{r}}}1 {š}{{\v{s}}}1
-	{ť}{{\v{t}}}1 {ú}{{\'u}}1 {ů}{{\r{u}}}1 {ý}{{\'y}}1 {ž}{{\v{z}}}1,		
-	numbers=left,
-	numbersep=5pt,
-	numberstyle=\tiny\color{black},
-	rulecolor=\color{black},
-	showlines=true,
-	showspaces=false,
-	showstringspaces=false,
-	showtabs=false,
-	stringstyle=\color{forestgreen},
-	tabsize=2,
-	title=\lstname,
-	upquote=true  % requires textcomp	
-}
-
-
-\lstdefinestyle{JSES6Base}{
-	backgroundcolor=\color{white},
-	basicstyle=\ttfamily,
-	breakatwhitespace=false,
-	breaklines=false,
-	captionpos=b,
-	columns=fullflexible,
-	commentstyle=\color{mediumgray}\upshape,
-	emph={},
-	emphstyle=\color{crimson},
-	extendedchars=true,  % requires inputenc
-	fontadjust=true,
-	frame=single,
-	identifierstyle=\color{black},
-	keepspaces=true,
-	keywordstyle=\color{mediumblue},
-	keywordstyle={[2]\color{darkviolet}},
-	keywordstyle={[3]\color{royalblue}},
- literate=%
-{á}{{\'a}}1 {č}{{\v{c}}}1 {ď}{{\v{d}}}1 {é}{{\'e}}1 {ě}{{\v{e}}}1
-{í}{{\'i}}1 {ň}{{\v{n}}}1 {ó}{{\'o}}1 {ř}{{\v{r}}}1 {š}{{\v{s}}}1
-{ť}{{\v{t}}}1 {ú}{{\'u}}1 {ů}{{\r{u}}}1 {ý}{{\'y}}1 {ž}{{\v{z}}}1,		
-	numbers=left,
-	numbersep=5pt,
-	numberstyle=\tiny\color{black},
-	rulecolor=\color{black},
-	showlines=true,
-	showspaces=false,
-	showstringspaces=false,
-	showtabs=false,
-	stringstyle=\color{forestgreen},
-	tabsize=2,
-	title=\lstname,
-	upquote=true  % requires textcomp
-}
-
-\lstdefinestyle{JavaScript}{
-	language=JavaScript,
-	style=JSES6Base,
-}
-\lstdefinestyle{ES6}{
-	language=ES6,
-	style=JSES6Base
+\lstdefinestyle{arduinoStyle}{
+    language=C++,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=single,
+    framesep=5pt,
+    framexleftmargin=5mm,
+    rulecolor=\color{black},
+    xleftmargin=10mm,
+    morekeywords={digitalWrite, setup, loop, rotateMotor}, 
+    identifierstyle=\color{codepurple} 
 }
 
 
@@ -221,7 +128,6 @@ openany
 %%%%%%%%%%%%%%%%%%%%
 \begin{document}
 	
-	\cleardoublepage
     \setcounter{page}{1}
     \pagestyle{empty}
 
@@ -248,7 +154,7 @@ openany
 			\end{center}  
 		}%%%
 		
-		\begin{figure}[h]
+		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=0.8\linewidth]{image/programovani-02.jpg} 
 		\end{figure}
@@ -266,17 +172,21 @@ openany
 		\end{table}		
 	}
 	
-\newpage 
 	
 %% Stránka obsahující poděkování a prohlášení
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Poděkování - nepovinné
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\noindent{\large{\bfseries{Poděkování}\\}}
-	\noindent Chtěl bych  poděkovat panu učiteli Mgr. Marcelu Godovskému za poskytnutí 3D tisku a užitečné rady při vytváření projektu.
-	
+    \newpage
+    \noindent{\large{\bfseries{Poděkování}\\}}
+    \noindent Chtěl bych  poděkovat panu učiteli Mgr. Marcelu Godovskému za poskytnutí 3D tisku a užitečné rady při vytváření projektu.
+
+
 	\vspace*{0.6\textheight} %% Vertikální mezeru je možné upravit
+
+
+
 
 %% Prohlášení - povinné
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -303,7 +213,7 @@ openany
 %% Abstrakt v češtině
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\noindent{\Large{\bfseries{Abstrakt}\\}}
-	\noindent Tato práce se zaměřuje na konstrukci dálkově ovládaného tanku, jehož většina součástek byla vyrobena technologií 3D tisku. Základní řídící jednotkou je vývojová deska ESP32 s vestavěnou kamerou a WiFi modulem, která umožňuje živé ovládání tanku prostřednictvím webového serveru postaveného na knihovně ESPAsyncWebServer. Webové rozhraní dává uživatelům možnost sledovat tank v reálném čase, což značně usnadňuje jeho ovladatelnost. Součástí projektu je také sestrojení vlastního ovladače jako možnost alternativního ovládání. \\
+    	\noindent Tato práce se zaměřuje na konstrukci dálkově ovládaného tanku, jehož většina součástek byla vyrobena technologií 3D tisku. Základní řídící jednotkou je vývojová deska ESP32 s vestavěnou kamerou a WiFi modulem, která umožňuje živé ovládání tanku prostřednictvím webového serveru postaveného na knihovně ESPAsyncWebServer. Webové rozhraní dává uživatelům možnost sledovat tank v reálném čase, což značně usnadňuje jeho ovladatelnost. Součástí projektu je také sestrojení vlastního ovladače jako možnost alternativního ovládání. \\
 	
 	\vspace{18pt}
 	
@@ -317,50 +227,55 @@ openany
 %% Stránka s generovaným obsahem
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Save the original 'plain' page style
+
 \fancypagestyle{originalplain}{
   \fancyhf{}
-  \fancyfoot[C]{\thepage} % Example: put page number at center of footer.
+  \fancyfoot[C]{\thepage} 
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
 }
 
-% Redefine the 'plain' page style to be empty
+
 \fancypagestyle{plain}{
-  \fancyhf{} % clear all header and footer fields
+  \fancyhf{} 
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
 }
 
-\pagestyle{empty} % apply empty page style
-	\tableofcontents %% Vygeneruje tabulku s obsahem
+\pagestyle{empty} 
+	\tableofcontents 
  
 %% Stránka s úvodem - povinná část
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 	\chapter*{Úvod}
 	\addcontentsline{toc}{chapter}{Úvod}
  \fancypagestyle{plain}{%
-  % Restore the original 'plain' style definitions
+
   \fancyhf{}
-  \fancyfoot[C]{\thepage} % Example: put page number at center of footer.
+  \fancyfoot[C]{\thepage} 
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
 }
     \pagestyle{plain}
  
-Mou hlavní motivací pro tento projekt byla má dlouhodobá záliba ve vojenské technice, jenž se se mnou táhne již od dětství a také zájem v oblasti hardware. Rozhodl jsem se tedy tyto své dvě záliby zkombinovat a vytvořit tak tento projekt. \\
+\noindent Mou hlavní motivací pro tento projekt byla má dlouhodobá záliba ve vojenské technice, jenž se se mnou táhne již od dětství a také zájem v oblasti hardware. Rozhodl jsem se tedy tyto své dvě záliby zkombinovat a vytvořit tak tento projekt. \\
 Cílem této práce bylo tedy vytvořit tank na dálkové ovládání s možností ovládání přes webový server nebo přes vlastnoručně vyrobený ovladač.
 Při vytváření mého projektu jsem se nejprve musel rozhodnout, které součástky budou nejvhodnější, a zároveň jsem pečlivě promýšlel, zda si vybrat předem sestavený model nebo se pustit do výroby vlastních komponentů a jejich následného 3D tisku.\\
 Původně jsem zamýšlel všechny díly sám vymodelovat, ale vzhledem k tomu, že toto řešení by bylo docela dost časově náročné, rozhodl jsem se najít si na internetu vhodný model podvozku i s pásy a zbytek domodelovat sám. Všechny díly jsem nakonec vytiskl na 3D tiskárně a smontoval dohromady.\\
 Jako jádro projektu jsem si zvolil právě vývojovou desku ESP32, vybavenou integrovaným Wi-Fi modulem a kamerou, a jako první jsem chtěl vytvořit jednoduchý webový server pomocí knihovny ESPAsynchWebServer, který by umožňoval připojenému uživateli tank ovládat pomocí živého obrazu z kamery na serveru. Další problematikou by bylo sestrojení vlastního ovladače jako alternativní možnost pro ovládání tanku.\\
-V této dokumentaci se tedy snažím podrobněji popsat svůj postup při řešení projektu ale také problémy se kterými jsem se setkal a jejich řešení. 
+V této dokumentaci se tedy snažím podrobněji popsat svůj postup při řešení projektu a také problémy se kterými jsem se setkal a jejich řešení. 
 
 \chapter{Využité technologie}
+
+\section{Technologie 3D tisku}
+\noindent Technologie 3D tisku představuje revoluční způsob výroby, který umožňuje vrstvení materiálů a vytváření trojrozměrných objektů podle digitálních modelů. Jednou z hlavních výhod této technologie je schopnost tvořit vrstvením, což znamená postupné nanášení materiálu podle přesného digitálního modelu. To přináší nejen efektivní výrobu, ale také možnost přizpůsobit design součástek dle konkrétních požadavků. Proces využívá 3D modelovací software pro vytváření designů a slicer software k přípravě dat pro tisk. Tiskárna postupně nanáší a vrství materiál, často termoplastický filament, a vytváří tak fyzický objekt. Tato technologie nachází široké uplatnění v průmyslu, od výroby prototypů přes modelářství až po vytváření funkčních součástek pro stroje a zařízení. Já se taktéž rozhodl využít tuto technologii ve svém projektu. Nejprve jsem chtěl všechny součástky sám vymodelovat, ale nakonec jsem přistoupil na kompromis vlastní výroby a již předem vymodelovaného projektu, který jsem si našel na internetu.
 
 \section{Hardware}
 \label{sec:zakladni_struktura}
 
-V této kapitole se podrobněji podíváme na jednotlivé součástky, které jsem ve svém projektu využil.
+V této kapitole se budu podrobně věnovat představení klíčových součástek, které jsem ve svém projektu využil.
+
+\newpage
 
 \subsection{Seznam součástek}
 
@@ -373,221 +288,253 @@ V této kapitole se podrobněji podíváme na jednotlivé součástky, které js
   \item Nepájivé pole
 \end{itemize}
 
-\subsection{ESP}
-Hlavní tělo dokumentu začíná příkazem \verb|\begin{document}| a končí \verb|\end{document}|. Veškerý obsah, který chcete mít ve svém dokumentu, by měl být umístěn mezi tyto dva příkazy. 
+\subsection{Vývojová deska ESP32-CAM}
+\noindent V mém projektu hraje klíčovou roli vývojová deska ESP32-CAM, která se stala nezbytným jádrem celého systému, jelikož na ní běží webový server, bez kterého by nebylo možné tank ovládat a také program pro pohyb tanku. Tato kompaktní vývojová deska od společnosti Espressif Systems kombinuje WiFi a Bluetooth komunikaci s kamerovým modulem OV2640 schopným snímání obrázků s rozlišením až 2 megapixely. Obsahuje celkem 10 digitálních GPIO pinů, a pro program je k dispozici pamět o celkové velikosti 128kB. Deska taktéž pracuje s napětím 5 V, což zajišťuje bezproblémovou integraci s dalšími součástkami projektu. 
 
-\subsection{Můstek}
-Pro organizaci obsahu se často používají sekce a podsekce. Tyto struktury pomáhají čtenáři lépe navigovat dokumentem a rozdělit text do logických bloků.
+	\begin{figure}[ht]
+		\centering 
+		\includegraphics[width=0.7\textwidth]{image/esp-detail} %
+		\caption{Vývojová deska ESP32-CAM \cite{ESP32}.} 
+	\end{figure}
 
-\begin{verbatim}
-	\section{Název sekce}
-	\subsection{Název podsekce}
-	\subsubsection{Název podpodsekce}
-\end{verbatim}
+\subsection{H-můstek L298N}
+\noindent H-můstek L298N je integrovaný obvod, který slouží jako řadič pro motory. Je široce využíván v elektronických projektech, zejména v robotice a modelářství. Tento můstek umožňuje kontrolu směru otáčení a rychlosti stejnosměrných motorů. Modul využívá výkonný čip ST L298N a zaručuje taktéž ochranou proti zkratu a přehřátí. Jeho konstrukce obsahuje dva H-můstky, což znamená, že může řídit až dva motory nezávisle na sobě. Tato komponenta poskytuje efektivní řešení pro pohonný systém v různých elektronických aplikacích. Jeho vestavěný 5V stabilizátor umožňuje kompatibilitu s dalšími komponenty mého projektu. V mém projektu jsem tento H-můstek využil k ovládání motorů. Jeho úlohou je převádět vstupní signály, které přicházejí ze serveru, na konkrétní směr otáčení motorů.
 
-\subsection{Servo}
-V \LaTeX{}u je nový odstavec vytvořen jednoduše vložením jedné nebo více prázdných řádek. Rozestupy mezi odstavci, stejně jako zarovnání textu, můžeme upravit podle potřeby.
+	\begin{figure}[ht]
+		\centering 
+		\includegraphics[width=0.7\textwidth]{image/h-mustek.png} %
+		\caption{VH-můstek L298N \cite{h-mustek}.} 
+	\end{figure}
+ 
+\newpage
+\subsection{Servo MG90S 180°}
+\noindent Motor Servo MG90S 180° je kompaktní, ale výkonný servomotor široce používaný v různých aplikacích, zejména v oblasti modelování, robotiky a automatizace. Tento motor je schopen otáčet se o 180 stupňů, díky čemuž je neocenitelný ve scénářích vyžadujících přesnou manipulaci s úhly. Já pro svůj projekt ale potřeboval motor s možností otáčení o 360 stupňů, a proto jsem s pomocí pana učitele Godovského provedl úpravy na tomto motoru, aby byl schopen poskytnout požadované otáčení.
 
+	\begin{figure}[ht]
+		\centering 
+		\includegraphics[width=0.4\textwidth]{image/servo.jpg} %
+		\caption{Plastové micro servo SG90 9g, 180° \cite{servo}.} 
+	\end{figure}
 
 \subsection{Napájení}
-V \LaTeX{}u je nový odstavec vytvořen jednoduše vložením jedné nebo více prázdných řádek. Rozestupy mezi odstavci, stejně jako zarovnání textu, můžeme upravit podle potřeby.
+\noindent Pro napájení jsem se rozhodl využít čtyři tužkové baterie umístěné v držáku, což mi poskytuje celkové napětí 7 V. Zdroj napájí nepájivé pole odkud pomocí kabelů přivádím proud do vývojové desky a také do H-můstku.
 
+	\vspace*{0.01\textheight}
+
+	\begin{figure}[ht]
+		\centering 
+		\includegraphics[width=0.4\textwidth]{image/zdroj.jpg} %
+		\caption{Napájení pro projekt.} 
+	\end{figure}
+
+\newpage
+\subsection{Nepájivé pole}
+\noindent Nepájivé pole, často nazývané také experimentální nebo prototypovací deska, představuje klíčový nástroj v elektronickém vývoji, a já jsem ho aktivně využíval ve fázi testování mého projektu. Tato deska poskytuje strukturované pole propojovacích otvorů, které umožňují snadné a dočasné připojení elektronických součástek bez nutnosti pájení. To se ukázalo jako neocenitelné zejména v raných fázích projektu, kdy byly potřeba časté úpravy a testování funkčnosti komponentů. Díky nepájivému poli jsem mohl flexibilně experimentovat s různými propojeními, připojovat a odpojovat komponenty a rychle reagovat na změny v návrhu. To nejen zrychlilo proces vývoje, ale také mi umožnilo systematicky ověřit funkčnost jednotlivých součástek.
+
+
+	\begin{figure}[ht]
+		\centering 
+		\includegraphics[width=0.6\textwidth]{image/pole.jpg} %
+		\caption{Nepájivé pole \cite{pole}.} 
+	\end{figure}
+
+
+
+\newpage
 \section{Software}
 \label{sec:prace_s_textem}
 
-Tato část se zaměřuje na základní techniky práce s textem v \LaTeX{}u, včetně formátování textu, vytváření seznamů a využití křížových odkazů a poznámek pod čarou.
+V této části bych se rád věnoval programovacímu jazyku Arduino, ve kterém jsem napsal kód pro svůj projekt. Zároveň představím vývojové prostředí PlatformIO, které jsem využil pro snadný vývoj, správu knihoven a ladění aplikace a také věnuji pár slov programu 3DS Max, ve kterém jsem modeloval některé součástky.
 
-\subsection{WebServer}
-Formátování textu je klíčovým prvkem pro zvýraznění důležitých informací a zlepšení čitelnosti dokumentu.
+\subsection{Programovací jazyk Arduino}
+\noindent Arduino je open-source programovací jazyk přímo vytvořen k programování integrovaných obvodů. Postavený na jazyce C++ s rozšířeními pro mikrokontrolery, umožňuje rychlé prototypování a snadnou implementaci elektronických zařízení. Kódy, nazývané "sketche", obsahují funkce setup(), sloužící k inicializaci a loop(), umožňující opakované provádění kódu. Arduino vyniká svou jednoduchou syntaxí a bohatou knihovnou funkcí. Díky aktivní komunitě je snadné sdílet kódy a projekty, což přispívá k jeho popularitě.
 
-\subsection{Ovládání}
-V \LaTeX{}u existuje několik způsobů, jak zvýraznit text. Můžeme použít tučné písmo, kurzívu nebo podtržení.
 
-\begin{verbatim}
-	\textbf{tučné písmo}, \textit{kurzíva}, \underline{podtržený text}
-\end{verbatim}
+\subsection{Vývojové prostředí PlatformIO}
+\noindent PlatformIO je integrované vývojové prostředí (IDE) pro vývoj mikrokontrolerových aplikací, včetně těch založených na platformě Arduino. Jeho hlavní výhody zahrnují jednoduchou správu knihoven, snadný přístup k různým platformám a jednotné rozhraní pro vývoj s různými mikrokontrolery. Toto prostředí usnadňuje vytváření, ladění a správu projektů, což z něj činí efektivní nástroj pro rozsáhlý vývoj embedded systémů.
 
 
 
-	\chapter{Způsoby řešení a použité postupy}
-	Jak už jsem psal výše \LaTeX je dosti komplexní systém, který umožňuje psát velmi rozsáhlé text. Jeho autor Donald Knuth ho stvořil, aby mohl vydat jeho učebnici \emph{The Art of Computer Programming} a dodnes se je využíván pro sazbu skript, učebnic, článků či závěrečných prací. V této kapitole najdeš ukázky různých funkcí a balíčků \LaTeX u od těch nejzákladnějších až po složitější. Neznamená to nutně, že všechny musíš použít, ale když potřebuješ pomoct, tak je dobré mít oporu. 
-	
-	Pokud s \LaTeX em úplně začínáš tak ti můžu doporučit přiručku \emph{Ne příliš stručný úvod do systému \LaTeX2e}~\cite{LaTeXprirucka}. Případně spoustu užitečných informací nalezneš na Wikibooks~\cite{wikibooksLaTeX}. Pokud narazíš na nějaký problém googli. Na internetu je spoustu fór, kde pravděpodobně už někdo podobný problém řešil. Asi nejvíce otho najdeš na stránce \emph{TeX - LaTeX Stackexchange} \cite{stackExchange}.
-	
-	
-	\section{Sestavení modelu} %%[Text, který bude v obsahu]{Text, který se vytiskne na stránce} Zkus měnit jednotlivé závorky a uvidíš :) 
-	Psaní v \LaTeX{u} není žádná věda, stačí psát normálně do zdrojového souboru. Pokud bys chtěl psát obrážky či číslovaný seznam, pak můžeš použít prostředí \texttt{itemize} či \texttt{enumerate}. Často je důležité používat nezlomitelnou mezeru. Tu uděláš pomocí \verb|~|~(tildy). Pokud budeš chtít psát uvozovky použij příkaz \texttt{uv}, pomocí něj se ti vytvoří uvozovky podle příslušného jazyka. V česku tedy ve formátu 99 66. Použití příkazu najdeš níže v textu.
-	
-	Občas je zapotřebí \LaTeX{u} pomoct při rozdělování slov. To se udělá snadno vložením symbolů \verb|\-| mezi jednotlivé slabiky.
- 
-    \section{Zprovoznění serveru} %%[Text, který bude v obsahu]{Text, který se vytiskne na stránce} Zkus měnit jednotlivé závorky a uvidíš :) 
-	Psaní v \LaTeX{u} není žádná věda, stačí psát normálně do zdrojového souboru. Pokud bys chtěl psát obrážky či číslovaný seznam, pak můžeš použít prostředí \texttt{itemize} či \texttt{enumerate}. Často je důležité používat nezlomitelnou mezeru. Tu uděláš pomocí \verb|~|~(tildy). Pokud budeš chtít psát uvozovky použij příkaz \texttt{uv}, pomocí něj se ti vytvoří uvozovky podle příslušného jazyka. V česku tedy ve formátu 99 66. Použití příkazu najdeš níže v textu.
-	
-	Občas je zapotřebí \LaTeX{u} pomoct při rozdělování slov. To se udělá snadno vložením symbolů \verb|\-| mezi jednotlivé slabiky.
- 
-    \section{Kód pro ovládání tanku} %%[Text, který bude v obsahu]{Text, který se vytiskne na stránce} Zkus měnit jednotlivé závorky a uvidíš :) 
-	Psaní v \LaTeX{u} není žádná věda, stačí psát normálně do zdrojového souboru. Pokud bys chtěl psát obrážky či číslovaný seznam, pak můžeš použít prostředí \texttt{itemize} či \texttt{enumerate}. Často je důležité používat nezlomitelnou mezeru. Tu uděláš pomocí \verb|~|~(tildy). Pokud budeš chtít psát uvozovky použij příkaz \texttt{uv}, pomocí něj se ti vytvoří uvozovky podle příslušného jazyka. V česku tedy ve formátu 99 66. Použití příkazu najdeš níže v textu.
-	
-	Občas je zapotřebí \LaTeX{u} pomoct při rozdělování slov. To se udělá snadno vložením symbolů \verb|\-| mezi jednotlivé slabiky.
-	
-	\subsection{Tabulky}
-	
-	U tabulek platí to stejné co u obrázků. Zarovnávají se na střed a nechávají se \uv{plavat} v textu. Tabulka narozdíl od textu, má popisek nahoře. U tabulky \ref{tab:ukazka} je použit balíček \texttt{booktabs}, pomocí kterého je celá tabulka naformátovaná.
-	
-	Seznam jak obrázků tak tabulek je pak vytvořen pomocí příkazů \texttt{listoftables} a~\texttt{list\-of\-fig\-ures} na konci práce před literaturou.
-	
-	\begin{table}[h]
-		\caption{Tato tabulka slouží jako ukázka toho, jak mohou tabulky vypadat.} %% popisek se u tebaluky píše nad ní
-		\label{tab:ukazka} %% označení pro pozdější odkazování se 
-		\centering
-		\begin{tabular}{lll}
-			\toprule %% příkazy z balíčku booktabs
-			záhlaví& této & tabulky\\
-			\midrule
-			obsah&tabulky& už\\
-			není & oddělený &čarami\\
-			\bottomrule
-		\end{tabular}
-	\end{table}
-	
-	
-	\subsection{Obrázky}
-	
-	U obrázků je dobré používat vektorové formáty, pokud to jde. \LaTeX se nejvíc kamarádí s formátem PDF. Do známého PDFka lze z jiných vektorových formátů (ať už SVG či ESP) obrázky přenést snadno pomocí grafických programů, jako je třeba Inkscape. \LaTeX si rozhodně poradí i s tradičními formáty PNG a JPG, avšak tyto obrázky mohou zabírat více 
 
+\chapter{Způsoby řešení a použité postupy}
+	
+\section{Sestavení modelu} 
+\noindent Proces sestavování mého tankového modelu byl poměrně namáhavý. Začal jsem tím, že jsem obdržel vymodelované součástky. Jako první jsem se pustil do skládání předních kol, kde jsem pečlivě propojil jednotlivé části a zajistil, aby byly pevně a správně umístěny. Dále jsem spojil dvě hlavní desky podvozku vozidla, čímž mi vznikl základ pro další konstrukci.
+Dalším klíčovým krokem bylo zapojení dvou servo motorů do zadní části korby. Tyto motory umožňují  pohyb a ovládání tanku, a tak jsem k nim následně připojil hnací kola, čímž jsem vytvořil pohonný mechanismus vozidla.
 
+\noindent Jako další jsem se věnoval vytváření pásů tanku. Každý z nich se skládal z padesáti jednotlivých dílků, které jsem sestavil a spojil pomocí drobného drátku, který jsem pečlivě provlékl mezi jednotlivými články. Tento proces byl sice detailní, a zabral poměrně dost času ale vytvořil jsem díky tomu opravdu realistický model pásu, bez kterého by se tank neobešel.
 
-u a při tisku se může projevit nižší rozlišení obrázků. Pokud chceš používat tyto obrázky, rozhodně měj na paměti, aby měli rozlišení alespoň 250 indálně 330 ppi.
-	
-	Obrázky se vkládají do prostředí \texttt{figure}, při úpravě šířky je možné krom tradičních jednotek jako cm nebo mm použít také jako jednotku šířku stránky \texttt{textwidth} to se hodí zejména když chceš mít více podobrázků. 
-	
-	U každého obrázku je důležité aby měl popisek, \texttt{caption}. Do popisku napiš, co na obrázku je, případně nějaký další popis, tak aby čtenář následně neměl sebemenší pochybnost. U obrázků co nejsou tvoje nezapomeň an citaci. Jinak by to totiž znamenalo, že jsi obrázek dělal ty sám, což není etické přivlastňovat si cizí díla. Popisek obrázku je věta, proto musí vždy končit tečkou.
-	
-	\begin{figure}[h!]
-		\centering %% příkaz, který ti obrázek zarovná na střed
-		\includegraphics[width=0.6\textwidth]{image/logo-skoly.png} %% vložení samotného obrátku
-		\caption{Logo SŠPU Opava \cite{sspuLogo}.} %% popisek obrázku, nezapomeň na citace!
-		\label{fig:logoSSPU} %% označení až budeš chtít na obrázek odkazovat
+\noindent Nakonec zbývalo už jsen nasadit pásy na svá místa, to se ale neobešlo bez problémů. Hnací kola jsou k servo motoru přilepena lepidlem a tudíž jsou docela křehká. Pásy byly udělané tak aby byly mezi koly napnuté a nestalo se, aby nějaký pás vypadl z drážek, to ale zapříčinilo, že se hnací kola pod nátlakem několikrát zkřivila, nebo rovnou odpadla. Rozhodl jsem se tedy pásy o článek rozšířit, což může způsobit, že pásy při jízdě mohou vypadnout.
+
+	\begin{figure}[h]
+		\centering 
+		\includegraphics[width=1\textwidth]{image/sestava.jpg} %
+		\caption{Sestavený podvozek tanku} 
 	\end{figure}
-	
-	Když chceš odkazovat na obrázek, stačí pak už jen napsat příkaz \texttt{ref} a do závorek napsat označení obrázku. Třeba logo SOČky, můžeš vidět na obrázku \ref{fig:logoSSPU} \cite{socSSPU}.
-	
-	
-	\begin{figure}[h!] \centering
-		\begin{subfigure}[h]{0.63\textwidth} %%prostředí pro podobrázek {šířka podobrázku}
-			\includegraphics[width=\textwidth]{image/vysledek_10} 
-			\caption{} %% aby se ti vysázelo označení obrázku.
-		\end{subfigure}
-		\begin{subfigure}[h]{0.63\textwidth}
-			\includegraphics[width=\textwidth]{image/vysledek_20}
-			\caption{}
-		\end{subfigure}
-		\caption[Graf závislosti rotace DH PSF $\Delta\varphi$ na defokusaci objektivu $\Delta z$.]{Graf závislosti rotace DH PSF $\Delta\varphi$ na defokusaci objektivu $\Delta z$, (a) při použití objektivu Plan Fluor 10, (b) při použití objektivu Plan Fluor 20. Měřená data (žluté body) jsou lineárně proloženy (přerušovaná přímka). }
-		\label{fig:rotace_grafy}
-	\end{figure}
-	
-		Pokud bys měl více podobrázků přichází do hry balíček \texttt{subcaption}. Pomocí něj lze vysázet i podobrázky. U podobrázků se popisek píše pouze jeden, dolů. Je v tomto připadě vhodné použít navíc hranaté závorky, do nichž se napíše kratší popisek, který se následně ukáže v seznamu obrázků.
-	
-	Všimni si, že obrázky jsou naschvál široké. Je to proto, aby byly dobře čitelné. Také si všimni popisku grafů. Ačkoli nejspíš netušíš co je to DH PSF či defokusace objektivu mělo by ti být jasné, že je důležité přesně graf popsat. To znamená co je na vodorovné ose, co je na svislé ose. V jakých jednotkách veličiny jsou. Které body co znamenají, která křivka má jaký význam. Napsat samotné \uv{$\Delta \varphi$} je málo, vždy raději připoměň, co daná značka znamená.
-	
 
-	
-	\subsection{Literatura}
-	
-	V \LaTeX{}u lze dělat seznam literatury dvěma způsoby. V této šabloně jsem použil ten, kdy se seznam literatury píše přímo do práce. Pro jeho vygenerování doporučuji použít některý z generátarů, jako jsou například Citace PRO \cite{citacePRO}. Pomocí citací lze vygenerovat přímo dokument, který se pak už jen překopíruje do textu a člověk nemusí nic zvýrazňovat. Dále lze využít Bibtex, který rozhodně do budoucna hodlám zaimplementovat do šablony, avšak jeho použití nemusí být tak přátelské k začátečníkům.
-	
-	Pokud bys chtěl odkazovat na vícero zdrojů stačí je napsat vedle sebe oddělené čárkou \cite{LaTeXprirucka, citacePRO, Born2019}. Případně můžu odkaz na konkrétní stránku dát do hranatých závorek, viz \cite[str.~1]{Born2019}
-	
-	\subsection{Programový kód}
-	Pro vložení programového kódu do dokumentu LaTeX s možností zvýraznění syntaxe můžete použít balíček \texttt{listings}. Tento balíček nabízí široké možnosti pro formátování kódu, včetně zvýraznění syntaxe pro různé programovací jazyky.
-	
-	Nejprve je třeba do preambule LaTeX dokumentu přidat \texttt{\\usepackage{listings}} a nastavit příslušné parametry. Příklad nastavení pro jazyk Python by mohl vypadat takto:
-	
+\newpage
+ \section{Zapojení a testování součástek}
+ \noindent Po sestavení modelu jsem se zaměřil na zapojování součástek do nepájivého pole. Prvním krokem bylo důkladné otestování každé součástky, abych zjistil, zda pracuje tak, jak má. Tento průběžný testovací proces mi umožnil identifikovat případné problémy a zajistit, že každá část mého projektu funguje spolehlivě a bezchybně. Pro nahrávání kódu do vývojové desky ESP32 jsem použil MB programmer, což je štít s USB portem. Tento štít se zapojí přímo do pinů vývojové desky, což usnadňuje konfiguraci a programování. Následně jsem propojil servo motory s H-můstkem, abych ověřil jejich funkčnost. Během této fáze jsem však narazil na problém, když se H-můstek ukázal jako nedostatečně výkonný pro kontrolu obou motorů. V důsledku toho jsem musel nahradit H-můstek silnějším modelem, což vyřešilo problém a umožnilo plné využití servo motorů v mém projektu. 
 
-\begin{lstlisting}[style=Python, caption={Ukázka Python kódu}]
-	# Python code here
-	def hello_world():
-		print("Hello, world!")
+\newpage
+\section{Zprovoznění serveru}
+\noindent Pro zprovoznění webového serveru jsem se rozhodl použít knihovny AsyncTCP a ESPAsyncWebServer. Nejdříve jsem integroval knihovnu AsyncTCP, což je asynchronní TCP/IP knihovna, umožňující rychlou a efektivní komunikaci. Tato knihovna poskytuje neblokující komunikaci, což je zásadní pro zachování rychlosti a plynulosti webového serveru.
+Dále jsem implementoval knihovnu ESPAsyncWebServer, což je moderní a flexibilní HTTP serverová knihovna pro ESP32. Tato knihovna umožňuje snadné vytváření webových stránek, obsluhu HTTP požadavků a vytváření uživatelsky příjemného rozhraní. Při vývoji serverových funkcí jsem mohl využít asynchronní přístup, což výrazně zvyšuje výkon serveru.
+
+\noindent Nakonec jsem konfiguroval webový server tak, aby poskytoval potřebné funkce pro mé zařízení. To zahrnovalo zpracování HTTP požadavků, ovládání výstupních zařízení, a vytváření dynamických webových stránek. Díky kombinaci těchto knihoven jsem mohl vytvořit responzivní a efektivní webové rozhraní, které je klíčové pro interaktivitu a vzdálené ovládání mého projektu. Celkově tyto knihovny poskytují robustní infrastrukturu pro vytváření webových serverů na platformě ESP32 s důrazem na rychlost, efektivitu a asynchronní komunikaci.
+
+\newpage
+ \begin{lstlisting}[style=arduinoStyle]
+AsyncWebServer server(80);
+
+void handleRoot(AsyncWebServerRequest *request)
+{
+  request->send_P(200, "text/html", htmlHomePage);
+}
+
+void handleNotFound(AsyncWebServerRequest *request)
+{
+  request->send(404, "text/plain", "File Not Found");
+}
+
+void setup(void)
+{
+  Serial.begin(115200);
+
+  server.on("/", HTTP_GET, handleRoot);
+  server.onNotFound(handleNotFound);
+
+  server.begin();
+  Serial.println("HTTP server started");
+
+}
 \end{lstlisting}
 
-
-\begin{lstlisting}[style=JavaScript, title={Kód}, caption={Ukázka JS kódu}]
-	// JavaScript code here
-	function helloWorld() {
-		console.log("Hello, world!");
-	}
-\end{lstlisting}	
-	
-\begin{lstlisting}[style=ES6, caption={ES6 (ECMAScript-2015) Listing}]
-	/* eslint-env es6 */
-	/* eslint-disable no-unused-vars */
-	
-	import Axios from 'axios'
-	import { BASE_URL } from './utils/api'
-	import { getAPIToken } from './utils/helpers'
-	
-	export default class User {
-		constructor () {
-			this.id = null
-			this.username = null
-			this.email = ''
-			this.isActive = false
-			this.lastLogin = ''  // ISO 8601 formatted timestamp.
-			this.lastPWChange = ''  // ISO 8601 formatted timestamp.
-		}
-	}
-	
-	const getUserProfile = async (id) => {
-		let user = new User()
-		await Axios.get(
-		`${BASE_URL}/users/${id}`,
-		{
-			headers: {
-				'Authorization': `Token ${getAPIToken()}`,
-			}
-		}
-		).then{response => {
-				// ...
-			}).catch(error => {
-				// ...
-			})
-		}
-\end{lstlisting}	
-	
-	\chapter{Výsledky řešení}
-	
-	Každou práci je dobré zkontrolovat, aby v ní nebyly pravopisné chyby, nebyla těžkopádně napsaná -- byla čtivá -- a neobsahovala žádný typografický nedostatek. Proto, když práci sepíšeš, nech ji chvilku odležet, třeba týden. Pak si ji po sobě znovu přečti. Hned uvidíš, kolik věcí bys napsal jinak případně kde tě bije do očí jaká chyba. Dej práci přečíst také svému školiteli a případně češtináři. Zajistíš tak, že bude obsahovat méně chyb.
-	
-	Pak můžeš práci vytisknout a hurá do soutěže.
+ \newpage
  
+\subsection{Připojení k WiFi}
+\noindent Pro dosažení bezdrátové konektivity a propojení s Wi-Fi jsem v projektu využil knihovnu WiFi.h. Tato knihovna poskytuje nezbytné nástroje pro konfiguraci a správu bezdrátového připojení na platformě ESP32. Po integrování knihovny jsem mohl v kódu definovat přístupová jména a hesla k Wi-Fi sítím, ke kterým jsem chtěl, aby se zařízení připojilo. Dále jsem implementoval kód pro inicializaci a připojení k Wi-Fi síti. Tímto způsobem jsem umožnil zařízení komunikovat s okolním prostředím a využívat výhod bezdrátového připojení. 
+
+	\vspace*{0.1\textheight}
+
+ \begin{lstlisting}[style=arduinoStyle]
+const char *ssid = "MyWiFiCar";
+const char *password = "12345678";
+
+void setup(void)
+{
+  Serial.begin(115200);
+
+  WiFi.softAP(ssid, password);
+  IPAddress IP = WiFi.softAPIP();
+  Serial.print("AP IP address: ");
+  Serial.println(IP);
+
+  server.on("/", HTTP_GET, handleRoot);
+  server.onNotFound(handleNotFound);
+
+  server.begin();
+  Serial.println("HTTP server started");
+
+}
+\end{lstlisting}
+
+ \newpage
+\section{Kód pro ovládání tanku}
+\noindent Při navrhování kódu pro ovládání mého tanku jsem systematicky postupoval, abych zajistil přehlednost a efektivitu programu. Začal jsem tím, že jsem přiřadil piny pro každý motor vozidla. Pro každý motor jsem stanovil dva piny, jeden pro jízdu dopředu a druhý pro jízdu dozadu. Abych zvýšil čitelnost kódu a usnadnil případné úpravy, využil jsem globální konstanty pro definici směrů pohybu a stavů motorů. Tyto konstanty poskytují srozumitelný a jednotný zápis v celém kódu. Dále jsem vytvořil funkci rotateMotor, která přijímá číslo motoru a směr otáčení. Tato funkce nastavuje příslušné piny motoru tak, abych dosáhl požadovaného směru pohybu. Pokud je směr FORWARD, motor se nastaví pro jízdu dopředu, pokud je směr BACKWARD, motor se nastaví pro jízdu dozadu, a v ostatních případech jsou oba piny vypnuty, což zastavuje motor.
+
+\vspace*{0.05\textheight}
+
+\begin{lstlisting}[style=arduinoStyle]
+void rotateMotor(int motorNumber, int motorDirection)
+{
+  if (motorDirection == FORWARD)
+  {
+    digitalWrite(motorPins[motorNumber].pinIN1, HIGH);
+    digitalWrite(motorPins[motorNumber].pinIN2, LOW);
+  }
+  else if (motorDirection == BACKWARD)
+  {
+    digitalWrite(motorPins[motorNumber].pinIN1, LOW);
+    digitalWrite(motorPins[motorNumber].pinIN2, HIGH);
+  }
+  else
+  {
+    digitalWrite(motorPins[motorNumber].pinIN1, LOW);
+    digitalWrite(motorPins[motorNumber].pinIN2, LOW);
+  }
+}
+}
+\end{lstlisting}
+
+\noindent Jako další bylo třeba vytvořit funkci, pomocí které bych definoval samotný pohyb tanku. Vytvořil jsem tedy funkci moveTank, jenž přebírá vstupní hodnotu, která odpovídá pohybu tanku. S využitím předem definovaných konstant pro směry pohybu, jako jsou UP, DOWN, LEFT a RIGHT, tato funkce zajišťuje různé typy pohybů vozidla. V případě, že vstupní hodnota indikuje pohyb nahoru (UP), funkce aktivuje otáčení obou motorů směrem dopředu. Podobně pro pohyb dolů (DOWN) se tank otáčí dozadu. Pro pohyb vpravo (RIGHT) a vlevo (LEFT) dochází ke kombinaci otáčení motorů v odpovídajícím směru. Během návrhu této části kódu jsem dbal na jednoduchost a srozumitelnost, abych usnadnil budoucí úpravy nebo přidání nových funkcionalit.
+
+\vspace*{0.05\textheight}
+
+\begin{lstlisting}[style=arduinoStyle]
+void moveTank(int inputValue)
+{
+  switch (inputValue)
+  {
+  case UP:
+    rotateMotor(RIGHT_MOTOR, FORWARD);
+    rotateMotor(LEFT_MOTOR, FORWARD);
+    break;
+  case DOWN:
+    rotateMotor(RIGHT_MOTOR, BACKWARD);
+    rotateMotor(LEFT_MOTOR, BACKWARD);
+    break;
+  case LEFT:
+    rotateMotor(RIGHT_MOTOR, FORWARD);
+    rotateMotor(LEFT_MOTOR, BACKWARD);
+    break;
+  case RIGHT:
+    rotateMotor(RIGHT_MOTOR, BACKWARD);
+    rotateMotor(LEFT_MOTOR, FORWARD);
+    break;
+  default:
+    rotateMotor(RIGHT_MOTOR, STOP);
+    rotateMotor(LEFT_MOTOR, STOP);
+    break;
+  }
+}
+\end{lstlisting}
+
+ 
+ 
+ \section{Webová aplikace}
+\noindent Během vytváření webové aplikace bylo mým cílem vytvořit jednoduché webové rozhraní, které by umožnilo nejen ovládání pohybu tanku pomocí tlačítek na webové stránce, ale také sledování živého videa z kamerového modulu. Přestože jsem původně plánoval ukládat HTML kód do samostatného souboru, narazil jsem na omezení mé desky, která neumožňovala pracovat s více soubory. Nakonec jsem se rozhodl uložit veškerý kód pro webový server společně s kódem pro ovládání vozidla do jednoho souboru. Toto omezení mě však motivovalo k pečlivé organizaci a strukturování kódu, aby byl stále přehledný a snadno udržovatelný. 
+
+\noindent Samotný webový server obsahuje minimalistické uživatelské rozhraní upravené s pomocí CSS stylů, video stream z kamery, čtyři tlačítka pro ovládání pohybu tanku a také posuvný slider, který umožňuje plynule nastavit intenzitu světla LED, jež je navržena k osvětlení prostředí v podmínkách nižší osvětlenosti.. Při stisku tlačítka je do funkce pro pohyb vozidla odeslána odpovídající konstanta, která určuje směr pohybu. To umožňuje intuitivní a plynulé ovládání tanku prostřednictvím webového rozhraní.
+ 
+
+	\chapter{Výsledky řešení}
+
     \section{Podoba hardwarového zařízení}
+\noindent Úplně nakonec jsem se zaměřil na vytvoření designu, který by skryl veškerou elektroniku uvnitř modelu tanku. Pro uzavření jsem vytvořil model horní části korby, poskytující funkční obal pro komponenty. Zdroj energie je umístěn v zadní části korby a prostřednictvím kabelů poskytuje napájení nepájivému poli. Zde je nainstalován H-můstek pro řízení motorů, a přes další soubor kabelů je propojena i deska ESP32 s kamerou. Ta je pevně připevněna ke přední části korby, umožňující snímání obrazu z kamery během pohybu tanku.
+
+\noindent I když jsem spokojen s celkovým vzhledem a umístěním elektroniky, jsou věci které bych v budoucnu chtěl určitě změnit. Z časových důvodů jsem se bohužel nedostal k vymodelování a vytisknutí věže tanku, což bych chtěl ještě ovšem dořešit. Chtěl bych také efektivněji a přehledněji řešit zapojení všech elektrotechnických prvků, jelikož aktuální propojení všech komponentů je poměrně nepřehledné a neestetické. 
+
     
     \section{Podoba webové aplikace}
     
-    Webová aplikace spolehlivě splňuje svůj účel, uživatelé se připojí a monhou tank bez problému ovládat pomocí 4 směrových tlačítek a sledovat při tom živý obraz z kamery tanku. Aplikace je také plně responzivní, lze ji proto používat i na mobilních telefonech nebo tabletech. Do budoucna bych mohl zapracovat na vylepšeném vzhledu, přidat tmavý a světlý režim nebo podobné úpravy.
+    Webová aplikace spolehlivě splňuje svůj účel, uživatelé se připojí a monhou tank bez problému ovládat pomocí 4 směrových tlačítek a sledovat při tom živý obraz z kamery tanku. Aplikace je také plně responzivní, lze ji proto používat i na mobilních telefonech nebo tabletech. Do budoucna bych si chtěl s celkový mvzhledem aplikace ještě pohrát a doladit některé nedostatky.
 	
 	\chapter*{Závěr}
 	
-    Celkově lze říci, že hlavním záměrem mého projektu bylo vytvořit plně funkční tank s možností dálkového ovládání prostřednictvím webové aplikace nebo ovladače. Většinu cílů, které jsem si stanovil se mi podařilo úspěšně splnit, z čehož mám osobně radost. Z časových důvodů se mi ale bohužel nepodařilo sestrojit ovladač, jako alternativní možnost ovládání. Tuto myšlenku avšak nemám v plánu zahodit a do budoucna bych na ní chtěl určitě ještě pracovat. Mezi mé další plány na vylepšení projektu patří zprovoznění otáčení věže, nebo další úpravy vzhledu. Celkově lze tedy říci, že tento projekt byl pro mě nejen technickou výzvou, ale i příležitostí k neustálému zdokonalování a rozšiřování mých znalostí.
+    Celkově lze říci, že hlavním záměrem mého projektu bylo vytvořit plně funkční tank s možností dálkového ovládání prostřednictvím webové aplikace nebo ovladače. Většinu cílů, které jsem si stanovil se mi podařilo úspěšně splnit, z čehož mám osobně radost. Z časových důvodů se mi ale bohužel nepodařilo sestrojit ovladač, jako alternativní možnost ovládání. Tuto myšlenku avšak nemám v plánu zahodit a do budoucna bych na ní chtěl určitě ještě zapracovat. Mezi mé další plány na vylepšení projektu patří zprovoznění otáčivé věže, nebo další drobné úpravy vzhledu. Celkově lze tedy říci, že tento projekt byl pro mě nejen technickou výzvou, ale i příležitostí k neustálému zdokonalování a rozšiřování mých znalostí.
 	
 	%% literatura
 	\begin{thebibliography}{99}
-		\bibitem{sablonaSOC} DOKULIL Jakub. \textit{Šablona pro psaní SOČ v programu \LaTeX} [Online]. Brno, 2020 [cit. 2020-08-24]. Dostupné z: \url{https://github.com/Kubiczek36/SOC_sablona}
-		\bibitem{LaTeXprirucka}OETIKER, Tobias, Hubert PARTL, Irene HYNA, Elisabeth SCHEGL, Michal KOČER a Pavel SÝKORA. \textit{Ne příliš stručný úvod do systému LaTeX2e} [online]. 1998 [cit. 2020-08-24]. Dostupné z: \url{https://www.jaroska.cz/elearning/informatika/typografie/lshort2e-cz.pdf}
-		\bibitem{wikibooksLaTeX}\textit{Wikibooks: LaTeX} [online]. San Francisco (CA): Wikimedia Foundation, 2001- [cit. 2020-08-24]. Dostupné z: \url{https://en.wikibooks.org/wiki/LaTeX}
-		\bibitem{stackExchange} \textit{TeX - LaTeX Stack Exchange} [online]. Stack Exchange, 2020 [cit. 2020-09-01]. Dostupné z: \url{https://tex.stackexchange.com}
-		\bibitem{sspuLogo} \textit{Střední škola průmyslová a umělecká Opava} [online]. [cit. 2023-11-11]. Dostupné z: \url{https://www.sspu-opava.cz}
-		\bibitem{citacePRO}\textit{Citace PRO} [online]. Citace.com, 2020 [cit. 2020-08-31]. Dostupné z: \url{https://www.citacepro.com}
-		\bibitem{Born2019} BORN, Max a Emil WOLF. \textit{Principles of optics: electromagnetic theory of propagation, interference and diffraction of light}. 7th (expanded) edition. Reprinted wirth corrections 2002. 15th printing 2019. Cambridge: Cambridge University Press, 2019. ISBN 978-0-521-64222-4.
+		\bibitem{ESP32} \textit{Vývojová deska ESP32} [online]. [cit. 2023-12-29]. Dostupné z: \url{https://bit.ly/vyvojova-deska-esp32-dratek}
+		\bibitem{h-mustek}\textit{H-můstek L298N} [online]. [cit. 2023-12-29]. Dostupné z: \url{https://www.laskakit.cz/h-mustek-pro-krokovy-motor-l298n--dualni-motorovy-modul/}
+        \bibitem{servo}\textit{Plastové micro servo SG90 9g, 180°} [online]. [cit. 2023-12-29]. Dostupné z: \url{https://www.hadex.cz/l759-servo-plastove-sg90-180-9g-prevody-z-nylonu/}
+        \bibitem{pole}\textit{Nepájivé pole} [online]. [cit. 2023-12-29]. Dostupné z: \url{https://www.laskakit.cz/nepajive-kontaktni-pole-830-pinu--bile/}
 	\end{thebibliography}
 	
 	%% obrázky 
 	\listoffigures
 	
-	%% tabulky
-	\listoftables
-	
-	\appendix %% začínají přílohy
 	
 	\titleformat{\chapter}[block]{\scshape\bfseries\LARGE}{Příloha \thechapter}{10pt}{\vspace{0pt}}[\vspace{-22pt}] %% nastavení nadpisu u příloh
 
