@@ -156,7 +156,7 @@ openany
 		
 		\begin{figure}[ht]
 			\centering
-			\includegraphics[width=0.8\linewidth]{image/programovani-02.jpg} 
+			\includegraphics[width=0.65\linewidth]{image/tank.jpg} 
 		\end{figure}
 		
 		\vspace{0.02 \textheight}
@@ -220,6 +220,11 @@ openany
 	\noindent{\large{\bfseries{Klíčová slova}}}
 	
 	\noindent ESP32, Tank, závěrečná práce, dokumentace, \dots 
+
+ 	\vspace{18pt}
+
+ \noindent{\Large{\bfseries{Abstrakt v angličtině}\\}}
+    \noindent This work focuses on the construction of a remotely controlled tank, the majority of whose components were manufactured using 3D printing technology. The core control unit is an ESP32 development board with a built-in camera and WiFi module, enabling live control of the tank through a web server built on the ESPAsyncWebServer library. The web interface provides users with the ability to monitor the tank in real-time, significantly enhancing its controllability. As part of the project, the development of a custom controller is also included as an alternative control option. \\
 	
 	
 	\clearpage %% Zalomení stránky
@@ -268,7 +273,11 @@ V této dokumentaci se tedy snažím podrobněji popsat svůj postup při řeše
 \chapter{Využité technologie}
 
 \section{Technologie 3D tisku}
-\noindent Technologie 3D tisku představuje revoluční způsob výroby, který umožňuje vrstvení materiálů a vytváření trojrozměrných objektů podle digitálních modelů. Jednou z hlavních výhod této technologie je schopnost tvořit vrstvením, což znamená postupné nanášení materiálu podle přesného digitálního modelu. To přináší nejen efektivní výrobu, ale také možnost přizpůsobit design součástek dle konkrétních požadavků. Proces využívá 3D modelovací software pro vytváření designů a slicer software k přípravě dat pro tisk. Tiskárna postupně nanáší a vrství materiál, často termoplastický filament, a vytváří tak fyzický objekt. Tato technologie nachází široké uplatnění v průmyslu, od výroby prototypů přes modelářství až po vytváření funkčních součástek pro stroje a zařízení. Já se taktéž rozhodl využít tuto technologii ve svém projektu. Nejprve jsem chtěl všechny součástky sám vymodelovat, ale nakonec jsem přistoupil na kompromis vlastní výroby a již předem vymodelovaného projektu, který jsem si našel na internetu.
+\noindent Technologie 3D tisku představuje revoluční způsob výroby, který umožňuje vrstvení materiálů a vytváření trojrozměrných objektů podle digitálních modelů. Jednou z hlavních výhod této technologie je schopnost tvořit vrstvením, což znamená postupné nanášení materiálu podle přesného digitálního modelu. To přináší nejen efektivní výrobu, ale také možnost přizpůsobit design součástek dle konkrétních požadavků.
+
+\noindent Proces využívá 3D modelovací software pro vytváření designů a slicer software k přípravě dat pro tisk. Tiskárna postupně nanáší a vrství materiál, často termoplastický filament, a vytváří tak fyzický objekt. Tato technologie nachází široké uplatnění v průmyslu, od výroby prototypů přes modelářství až po vytváření funkčních součástek pro stroje a zařízení. 
+
+\noindent Já se taktéž rozhodl využít tuto technologii ve svém projektu. Nejprve jsem chtěl všechny součástky sám vymodelovat, ale nakonec jsem přistoupil na kompromis vlastní výroby a již předem vymodelovaného projektu, který jsem si našel na internetu.
 
 \section{Hardware}
 \label{sec:zakladni_struktura}
@@ -289,7 +298,7 @@ V této kapitole se budu podrobně věnovat představení klíčových součást
 \end{itemize}
 
 \subsection{Vývojová deska ESP32-CAM}
-\noindent V mém projektu hraje klíčovou roli vývojová deska ESP32-CAM, která se stala nezbytným jádrem celého systému, jelikož na ní běží webový server, bez kterého by nebylo možné tank ovládat a také program pro pohyb tanku. Tato kompaktní vývojová deska od společnosti Espressif Systems kombinuje WiFi a Bluetooth komunikaci s kamerovým modulem OV2640 schopným snímání obrázků s rozlišením až 2 megapixely. Obsahuje celkem 10 digitálních GPIO pinů, a pro program je k dispozici pamět o celkové velikosti 128kB. Deska taktéž pracuje s napětím 5 V, což zajišťuje bezproblémovou integraci s dalšími součástkami projektu. 
+\noindent V mém projektu hraje klíčovou roli vývojová deska ESP32-CAM, která se stala nezbytným jádrem celého systému, jelikož na ní běží webový server, bez kterého by nebylo možné tank ovládat a také program pro pohyb tanku. Tato kompaktní vývojová deska od společnosti Espressif Systems kombinuje WiFi a Bluetooth komunikaci s kamerovým modulem OV2640 schopným snímání obrázků s rozlišením až 2 megapixely. Obsahuje celkem 10 digitálních GPIO pinů, a pro program je k dispozici pamět o celkové velikosti 128~KB. Deska taktéž pracuje s napětím 5~V, což zajišťuje bezproblémovou integraci s dalšími součástkami projektu. 
 
 	\begin{figure}[ht]
 		\centering 
@@ -298,8 +307,12 @@ V této kapitole se budu podrobně věnovat představení klíčových součást
 	\end{figure}
 
 \subsection{H-můstek L298N}
-\noindent H-můstek L298N je integrovaný obvod, který slouží jako řadič pro motory. Je široce využíván v elektronických projektech, zejména v robotice a modelářství. Tento můstek umožňuje kontrolu směru otáčení a rychlosti stejnosměrných motorů. Modul využívá výkonný čip ST L298N a zaručuje taktéž ochranou proti zkratu a přehřátí. Jeho konstrukce obsahuje dva H-můstky, což znamená, že může řídit až dva motory nezávisle na sobě. Tato komponenta poskytuje efektivní řešení pro pohonný systém v různých elektronických aplikacích. Jeho vestavěný 5V stabilizátor umožňuje kompatibilitu s dalšími komponenty mého projektu. V mém projektu jsem tento H-můstek využil k ovládání motorů. Jeho úlohou je převádět vstupní signály, které přicházejí ze serveru, na konkrétní směr otáčení motorů.
+\noindent H-můstek L298N je integrovaný obvod, který slouží jako řadič pro motory. Je široce využíván v elektronických projektech, zejména v robotice a modelářství. Tento můstek umožňuje kontrolu směru otáčení a rychlosti stejnosměrných motorů. Modul využívá výkonný čip ST L298N a zaručuje taktéž ochranou proti zkratu a přehřátí. Jeho konstrukce obsahuje dva H-můstky, což znamená, že může řídit až dva motory nezávisle na sobě. Tato komponenta poskytuje efektivní řešení pro pohonný systém v různých elektronických aplikacích. Jeho vestavěný 5~V stabilizátor umožňuje kompatibilitu s dalšími komponenty mého projektu. 
 
+\noindent V mém projektu jsem tento H-můstek využil k ovládání motorů. Jeho úlohou je převádět vstupní signály, které přicházejí ze serveru, na konkrétní směr otáčení motorů.
+
+
+\vspace*{0.05\textheight}
 	\begin{figure}[ht]
 		\centering 
 		\includegraphics[width=0.7\textwidth]{image/h-mustek.png} %
@@ -329,9 +342,11 @@ V této kapitole se budu podrobně věnovat představení klíčových součást
 
 \newpage
 \subsection{Nepájivé pole}
-\noindent Nepájivé pole, často nazývané také experimentální nebo prototypovací deska, představuje klíčový nástroj v elektronickém vývoji, a já jsem ho aktivně využíval ve fázi testování mého projektu. Tato deska poskytuje strukturované pole propojovacích otvorů, které umožňují snadné a dočasné připojení elektronických součástek bez nutnosti pájení. To se ukázalo jako neocenitelné zejména v raných fázích projektu, kdy byly potřeba časté úpravy a testování funkčnosti komponentů. Díky nepájivému poli jsem mohl flexibilně experimentovat s různými propojeními, připojovat a odpojovat komponenty a rychle reagovat na změny v návrhu. To nejen zrychlilo proces vývoje, ale také mi umožnilo systematicky ověřit funkčnost jednotlivých součástek.
+\noindent Nepájivé pole, často nazývané také experimentální nebo prototypovací deska, představuje klíčový nástroj v elektronickém vývoji, a já jsem ho aktivně využíval ve fázi testování mého projektu. Tato deska poskytuje strukturované pole propojovacích otvorů, které umožňují snadné a dočasné připojení elektronických součástek bez nutnosti pájení. 
 
+\noindent To se ukázalo jako neocenitelné zejména v raných fázích projektu, kdy byly potřeba časté úpravy a testování funkčnosti komponentů. Díky nepájivému poli jsem mohl flexibilně experimentovat s různými propojeními, připojovat a odpojovat komponenty a rychle reagovat na změny v návrhu. To nejen zrychlilo proces vývoje, ale také mi umožnilo systematicky ověřit funkčnost jednotlivých součástek.
 
+\vspace*{0.05\textheight}
 	\begin{figure}[ht]
 		\centering 
 		\includegraphics[width=0.6\textwidth]{image/pole.jpg} %
@@ -362,21 +377,29 @@ V této části bych se rád věnoval programovacímu jazyku Arduino, ve kterém
 \noindent Proces sestavování mého tankového modelu byl poměrně namáhavý. Začal jsem tím, že jsem obdržel vymodelované součástky. Jako první jsem se pustil do skládání předních kol, kde jsem pečlivě propojil jednotlivé části a zajistil, aby byly pevně a správně umístěny. Dále jsem spojil dvě hlavní desky podvozku vozidla, čímž mi vznikl základ pro další konstrukci.
 Dalším klíčovým krokem bylo zapojení dvou servo motorů do zadní části korby. Tyto motory umožňují  pohyb a ovládání tanku, a tak jsem k nim následně připojil hnací kola, čímž jsem vytvořil pohonný mechanismus vozidla.
 
+	\begin{figure}[h]
+		\centering 
+		\includegraphics[width=0.9\textwidth]{image/sestavaa.jpg} %
+		\caption{Sestavený podvozek tanku} 
+	\end{figure}
+\newpage
 \noindent Jako další jsem se věnoval vytváření pásů tanku. Každý z nich se skládal z padesáti jednotlivých dílků, které jsem sestavil a spojil pomocí drobného drátku, který jsem pečlivě provlékl mezi jednotlivými články. Tento proces byl sice detailní, a zabral poměrně dost času ale vytvořil jsem díky tomu opravdu realistický model pásu, bez kterého by se tank neobešel.
+
+
 
 \noindent Nakonec zbývalo už jsen nasadit pásy na svá místa, to se ale neobešlo bez problémů. Hnací kola jsou k servo motoru přilepena lepidlem a tudíž jsou docela křehká. Pásy byly udělané tak aby byly mezi koly napnuté a nestalo se, aby nějaký pás vypadl z drážek, to ale zapříčinilo, že se hnací kola pod nátlakem několikrát zkřivila, nebo rovnou odpadla. Rozhodl jsem se tedy pásy o článek rozšířit, což může způsobit, že pásy při jízdě mohou vypadnout.
 
+\vspace*{0.05\textheight}
 	\begin{figure}[h]
 		\centering 
-		\includegraphics[width=1\textwidth]{image/sestava.jpg} %
-		\caption{Sestavený podvozek tanku} 
+		\includegraphics[width=0.9\textwidth]{image/pasy2.jpg} %
+		\caption{Pásy tanku} 
 	\end{figure}
 
 \newpage
  \section{Zapojení a testování součástek}
  \noindent Po sestavení modelu jsem se zaměřil na zapojování součástek do nepájivého pole. Prvním krokem bylo důkladné otestování každé součástky, abych zjistil, zda pracuje tak, jak má. Tento průběžný testovací proces mi umožnil identifikovat případné problémy a zajistit, že každá část mého projektu funguje spolehlivě a bezchybně. Pro nahrávání kódu do vývojové desky ESP32 jsem použil MB programmer, což je štít s USB portem. Tento štít se zapojí přímo do pinů vývojové desky, což usnadňuje konfiguraci a programování. Následně jsem propojil servo motory s H-můstkem, abych ověřil jejich funkčnost. Během této fáze jsem však narazil na problém, když se H-můstek ukázal jako nedostatečně výkonný pro kontrolu obou motorů. V důsledku toho jsem musel nahradit H-můstek silnějším modelem, což vyřešilo problém a umožnilo plné využití servo motorů v mém projektu. 
 
-\newpage
 \section{Zprovoznění serveru}
 \noindent Pro zprovoznění webového serveru jsem se rozhodl použít knihovny AsyncTCP a ESPAsyncWebServer. Nejdříve jsem integroval knihovnu AsyncTCP, což je asynchronní TCP/IP knihovna, umožňující rychlou a efektivní komunikaci. Tato knihovna poskytuje neblokující komunikaci, což je zásadní pro zachování rychlosti a plynulosti webového serveru.
 Dále jsem implementoval knihovnu ESPAsyncWebServer, což je moderní a flexibilní HTTP serverová knihovna pro ESP32. Tato knihovna umožňuje snadné vytváření webových stránek, obsluhu HTTP požadavků a vytváření uživatelsky příjemného rozhraní. Při vývoji serverových funkcí jsem mohl využít asynchronní přístup, což výrazně zvyšuje výkon serveru.
@@ -480,18 +503,22 @@ void moveTank(int inputValue)
     rotateMotor(RIGHT_MOTOR, FORWARD);
     rotateMotor(LEFT_MOTOR, FORWARD);
     break;
+    
   case DOWN:
     rotateMotor(RIGHT_MOTOR, BACKWARD);
     rotateMotor(LEFT_MOTOR, BACKWARD);
     break;
+    
   case LEFT:
     rotateMotor(RIGHT_MOTOR, FORWARD);
     rotateMotor(LEFT_MOTOR, BACKWARD);
     break;
+    
   case RIGHT:
     rotateMotor(RIGHT_MOTOR, BACKWARD);
     rotateMotor(LEFT_MOTOR, FORWARD);
     break;
+    
   default:
     rotateMotor(RIGHT_MOTOR, STOP);
     rotateMotor(LEFT_MOTOR, STOP);
@@ -522,7 +549,7 @@ void moveTank(int inputValue)
 	
 	\chapter*{Závěr}
 	
-    Celkově lze říci, že hlavním záměrem mého projektu bylo vytvořit plně funkční tank s možností dálkového ovládání prostřednictvím webové aplikace nebo ovladače. Většinu cílů, které jsem si stanovil se mi podařilo úspěšně splnit, z čehož mám osobně radost. Z časových důvodů se mi ale bohužel nepodařilo sestrojit ovladač, jako alternativní možnost ovládání. Tuto myšlenku avšak nemám v plánu zahodit a do budoucna bych na ní chtěl určitě ještě zapracovat. Mezi mé další plány na vylepšení projektu patří zprovoznění otáčivé věže, nebo další drobné úpravy vzhledu. Celkově lze tedy říci, že tento projekt byl pro mě nejen technickou výzvou, ale i příležitostí k neustálému zdokonalování a rozšiřování mých znalostí.
+Cílem projektu bylo vytvořit funkční tank na dálkové ovládání, který by byl ovládán buď pomocí webové aplikace nebo vlastního ovladače Většina cílů byla splněna a tank je nyní možné ovládat pomocí webové aplikace. Tvorbu vlastního ovladače, který by sloužil tanku jako alternativní možnost ovládání, jsem bohužel z časových důvodů již nestihl zrealizovat. Tuto myšlenku avšak nemám v plánu zahodit a do budoucna bych na ní chtěl určitě ještě zapracovat. Při vývoji mě nicméně napadl nespočet dalších možných změn, které by projekt vylepšily, jako například vymodelování věže a její následné zprovoznění, nebo také menší úpravy vzhledu webové aplikace. Na tato vylepšení bych se chtěl v budoucnu určitě také zaměřit. Celkově lze tedy říci, že tento projekt byl pro mě nejen technickou výzvou, ale i příležitostí k neustálému zdokonalování a rozšiřování mých znalostí.
 	
 	%% literatura
 	\begin{thebibliography}{99}
