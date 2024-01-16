@@ -1,4 +1,3 @@
-#include "esp_camera.h"
 #include <Arduino.h>
 #include <WiFi.h>
 #include <AsyncTCP.h>
@@ -6,61 +5,44 @@
 #include <iostream>
 #include <sstream>
 
+// Struktura pro definici pinů motoru
 struct MOTOR_PINS
 {
   int pinIN1;
   int pinIN2;
 };
-
+// Seznam pinů pro jednotlivé motory
 std::vector<MOTOR_PINS> motorPins =
     {
-        {13, 15}, // RIGHT_MOTOR Pins (EnA, IN1, IN2)
-        {14, 2},  // LEFT_MOTOR  Pins (EnB, IN3, IN4)
+        {13, 15}, // Pinování pro PRAVÝ MOTOR (IN1, IN2)
+        {14, 2},  // Pinování pro LEVÝ MOTOR  (IN3, IN4)
 };
+// Definice pinu pro světlo
 #define LIGHT_PIN 4
-
+// Konstanty pro směry pohybu tanku
 #define UP 1
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
 #define STOP 0
-
+// Identifikátory pro jednotlivé motory
 #define RIGHT_MOTOR 0
 #define LEFT_MOTOR 1
-
+// Směry pohybu motorů
 #define FORWARD 1
 #define BACKWARD -1
-
+// /*Slouží k nastavení parametrů PWM (Pulse Width Modulation) pro kontrolu různých funkcí, jako je řízení rychlosti nebo intenzity světla u kamery*/
 const int PWMFreq = 1000; /* 1 KHz */
 const int PWMResolution = 8;
 const int PWMLightChannel = 3;
-
-// Camera related constants
-#define PWDN_GPIO_NUM 32
-#define RESET_GPIO_NUM -1
-#define XCLK_GPIO_NUM 0
-#define SIOD_GPIO_NUM 26
-#define SIOC_GPIO_NUM 27
-#define Y9_GPIO_NUM 35
-#define Y8_GPIO_NUM 34
-#define Y7_GPIO_NUM 39
-#define Y6_GPIO_NUM 36
-#define Y5_GPIO_NUM 21
-#define Y4_GPIO_NUM 19
-#define Y3_GPIO_NUM 18
-#define Y2_GPIO_NUM 5
-#define VSYNC_GPIO_NUM 25
-#define HREF_GPIO_NUM 23
-#define PCLK_GPIO_NUM 22
-
+// Nastavení přístupových údajů k Wi-Fi síti
 const char *ssid = "Tank";
 const char *password = "12345678";
-
+// Inicializace serveru a WebSocketů
 AsyncWebServer server(80);
-AsyncWebSocket wsCamera("/Camera");
-AsyncWebSocket wsCarInput("/CarInput");
-uint32_t cameraClientId = 0;
+AsyncWebSocket wsTankInput("/TankInput");
 
+// HTML kód pro stránku
 const char *htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
 <!DOCTYPE html>
  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -240,22 +222,21 @@ const char *htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
   <!--h2 style="color: teal;text-align:center;">Wi-Fi Camera &#128663; Control</h2-->
 
   <div class="container">
-    <img id="cameraImage" src=""></td>
     <div class="button-layout">
-      <button type="button" class="button" ontouchstart='sendButtonInput("MoveCar","1")' ontouchend='sendButtonInput("MoveCar","0")' onmousedown='sendButtonInput("MoveCar","1")' onmouseup='sendButtonInput("MoveCar","0")'><svg class="arrows" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <button type="button" class="button" ontouchstart='sendButtonInput("MoveTank","1")' ontouchend='sendButtonInput("MoveTank","0")' onmousedown='sendButtonInput("MoveTank","1")' onmouseup='sendButtonInput("MoveTank","0")'><svg class="arrows" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <g transform="rotate(90 12 12)">
             <path fill="currentColor" d="m4.431 12.822l13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645" />
           </g>
         </svg></button>
-      <button type="button" class="button" ontouchstart='sendButtonInput("MoveCar","3")' ontouchend='sendButtonInput("MoveCar","0")' onmousedown='sendButtonInput("MoveCar","3")' onmouseup='sendButtonInput("MoveCar","0")'><svg class="arrows" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <button type="button" class="button" ontouchstart='sendButtonInput("MoveTank","3")' ontouchend='sendButtonInput("MoveTank","0")' onmousedown='sendButtonInput("MoveTank","3")' onmouseup='sendButtonInput("MoveTank","0")'><svg class="arrows" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <path fill="currentColor" d="m4.431 12.822l13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645" />
         </svg></button>
-      <button type="button" class="button" ontouchstart='sendButtonInput("MoveCar","4")' ontouchend='sendButtonInput("MoveCar","0")' onmousedown='sendButtonInput("MoveCar","4")' onmouseup='sendButtonInput("MoveCar","0")'><svg class="arrows" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <button type="button" class="button" ontouchstart='sendButtonInput("MoveTank","4")' ontouchend='sendButtonInput("MoveTank","0")' onmousedown='sendButtonInput("MoveTank","4")' onmouseup='sendButtonInput("MoveTank","0")'><svg class="arrows" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <g transform="rotate(180 12 12)">
             <path fill="currentColor" d="m4.431 12.822l13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645" />
           </g>
         </svg></button>
-      <button type="button" class="button" ontouchstart='sendButtonInput("MoveCar","2")' ontouchend='sendButtonInput("MoveCar","0")' onmousedown='sendButtonInput("MoveCar","2")' onmouseup='sendButtonInput("MoveCar","0")'><svg class="arrows" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <button type="button" class="button" ontouchstart='sendButtonInput("MoveTank","2")' ontouchend='sendButtonInput("MoveTank","0")' onmousedown='sendButtonInput("MoveTank","2")' onmouseup='sendButtonInput("MoveTank","0")'><svg class="arrows" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <g transform="rotate(-90 12 12)">
             <path fill="currentColor" d="m4.431 12.822l13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645" />
           </g>
@@ -277,46 +258,30 @@ const char *htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
       const left = (slider.clientWidth / e.target.max) * e.target.value
       wrapper.style.setProperty('--width', left + "px");
       })
-      var webSocketCameraUrl = "ws:\/\/" + window.location.hostname + "/Camera";
-      var webSocketCarInputUrl = "ws:\/\/" + window.location.hostname + "/CarInput";      
-      var websocketCamera;
-      var websocketCarInput;
+      var webSocketTankInputUrl = "ws:\/\/" + window.location.hostname + "/TankInput";      
+      var websocketTankInput;
       
-      function initCameraWebSocket() 
+      function initTankInputWebSocket() 
       {
-        websocketCamera = new WebSocket(webSocketCameraUrl);
-        websocketCamera.binaryType = 'blob';
-        websocketCamera.onopen    = function(event){};
-        websocketCamera.onclose   = function(event){setTimeout(initCameraWebSocket, 2000);};
-        websocketCamera.onmessage = function(event)
-        {
-          var imageId = document.getElementById("cameraImage");
-          imageId.src = URL.createObjectURL(event.data);
-        };
-      }
-      
-      function initCarInputWebSocket() 
-      {
-        websocketCarInput = new WebSocket(webSocketCarInputUrl);
-        websocketCarInput.onopen    = function(event)
+        websocketTankInput = new WebSocket(webSocketTankInputUrl);
+        websocketTankInput.onopen    = function(event)
         {
           var lightButton = document.getElementById("Light");
           sendButtonInput("Light", lightButton.value);
         };
-        websocketCarInput.onclose   = function(event){setTimeout(initCarInputWebSocket, 2000);};
-        websocketCarInput.onmessage = function(event){};        
+        websocketTankInput.onclose   = function(event){setTimeout(initTankInputWebSocket, 2000);};
+        websocketTankInput.onmessage = function(event){};        
       }
       
       function initWebSocket() 
       {
-        initCameraWebSocket ();
-        initCarInputWebSocket();
+        initTankInputWebSocket();
       }
 
       function sendButtonInput(key, value) 
       {
         var data = key + "," + value;
-        websocketCarInput.send(data);
+        websocketTankInput.send(data);
       }
     
       window.onload = initWebSocket;    
@@ -325,6 +290,7 @@ const char *htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
 </html>
 )HTMLHOMEPAGE";
 
+// Funkce pro ovládání rotace motoru podle směru
 void rotateMotor(int motorNumber, int motorDirection)
 {
   if (motorDirection == FORWARD)
@@ -343,8 +309,8 @@ void rotateMotor(int motorNumber, int motorDirection)
     digitalWrite(motorPins[motorNumber].pinIN2, LOW);
   }
 }
-
-void moveCar(int inputValue)
+// Funkce pro pohyb tanku na základě zadaného vstupu
+void moveTank(int inputValue)
 {
   Serial.printf("Got value as %d\n", inputValue);
   switch (inputValue)
@@ -381,7 +347,7 @@ void moveCar(int inputValue)
     break;
   }
 }
-
+// Obsluha root adresy pro zobrazení úvodní stránky
 void handleRoot(AsyncWebServerRequest *request)
 {
   request->send_P(200, "text/html", htmlHomePage);
@@ -391,14 +357,15 @@ void handleNotFound(AsyncWebServerRequest *request)
 {
   request->send(404, "text/plain", "File Not Found");
 }
-
-void onCarInputWebSocketEvent(AsyncWebSocket *server,
+// Funkce pro zpracování WebSocket událostí pro ovládání tanku
+void onTankInputWebSocketEvent(AsyncWebSocket *server,
                               AsyncWebSocketClient *client,
                               AwsEventType type,
                               void *arg,
                               uint8_t *data,
                               size_t len)
 {
+  // Zpracování různých událostí WebSocket pro ovládání tanku 
   switch (type)
   {
   case WS_EVT_CONNECT:
@@ -406,7 +373,7 @@ void onCarInputWebSocketEvent(AsyncWebSocket *server,
     break;
   case WS_EVT_DISCONNECT:
     Serial.printf("WebSocket client #%u disconnected\n", client->id());
-    moveCar(0);
+    moveTank(0);
     ledcWrite(PWMLightChannel, 0);
     break;
   case WS_EVT_DATA:
@@ -422,9 +389,9 @@ void onCarInputWebSocketEvent(AsyncWebSocket *server,
       std::getline(ss, value, ',');
       Serial.printf("Key [%s] Value[%s]\n", key.c_str(), value.c_str());
       int valueInt = atoi(value.c_str());
-      if (key == "MoveCar")
+      if (key == "MoveTank")
       {
-        moveCar(valueInt);
+        moveTank(valueInt);
       }
       else if (key == "Light")
       {
@@ -440,111 +407,9 @@ void onCarInputWebSocketEvent(AsyncWebSocket *server,
   }
 }
 
-void onCameraWebSocketEvent(AsyncWebSocket *server,
-                            AsyncWebSocketClient *client,
-                            AwsEventType type,
-                            void *arg,
-                            uint8_t *data,
-                            size_t len)
-{
-  switch (type)
-  {
-  case WS_EVT_CONNECT:
-    Serial.printf("WebSocket client #%u connected from %s\n", client->id(), client->remoteIP().toString().c_str());
-    cameraClientId = client->id();
-    break;
-  case WS_EVT_DISCONNECT:
-    Serial.printf("WebSocket client #%u disconnected\n", client->id());
-    cameraClientId = 0;
-    break;
-  case WS_EVT_DATA:
-    break;
-  case WS_EVT_PONG:
-  case WS_EVT_ERROR:
-    break;
-  default:
-    break;
-  }
-}
-
-void setupCamera()
-{
-  camera_config_t config;
-  config.ledc_channel = LEDC_CHANNEL_0;
-  config.ledc_timer = LEDC_TIMER_0;
-  config.pin_d0 = Y2_GPIO_NUM;
-  config.pin_d1 = Y3_GPIO_NUM;
-  config.pin_d2 = Y4_GPIO_NUM;
-  config.pin_d3 = Y5_GPIO_NUM;
-  config.pin_d4 = Y6_GPIO_NUM;
-  config.pin_d5 = Y7_GPIO_NUM;
-  config.pin_d6 = Y8_GPIO_NUM;
-  config.pin_d7 = Y9_GPIO_NUM;
-  config.pin_xclk = XCLK_GPIO_NUM;
-  config.pin_pclk = PCLK_GPIO_NUM;
-  config.pin_vsync = VSYNC_GPIO_NUM;
-  config.pin_href = HREF_GPIO_NUM;
-  config.pin_sscb_sda = SIOD_GPIO_NUM;
-  config.pin_sscb_scl = SIOC_GPIO_NUM;
-  config.pin_pwdn = PWDN_GPIO_NUM;
-  config.pin_reset = RESET_GPIO_NUM;
-  config.xclk_freq_hz = 20000000;
-  config.pixel_format = PIXFORMAT_JPEG;
-
-  config.frame_size = FRAMESIZE_VGA;
-  config.jpeg_quality = 10;
-  config.fb_count = 1;
-
-  // camera init
-  esp_err_t err = esp_camera_init(&config);
-  if (err != ESP_OK)
-  {
-    Serial.printf("Camera init failed with error 0x%x", err);
-    return;
-  }
-
-  if (psramFound())
-  {
-    heap_caps_malloc_extmem_enable(20000);
-  }
-}
-
-void sendCameraPicture()
-{
-  if (cameraClientId == 0)
-  {
-    return;
-  }
-  unsigned long startTime1 = millis();
-  // capture a frame
-  camera_fb_t *fb = esp_camera_fb_get();
-  if (!fb)
-  {
-    Serial.println("Frame buffer could not be acquired");
-    return;
-  }
-
-  unsigned long startTime2 = millis();
-  wsCamera.binary(cameraClientId, fb->buf, fb->len);
-  esp_camera_fb_return(fb);
-
-  // Wait for message to be delivered
-  while (true)
-  {
-    AsyncWebSocketClient *clientPointer = wsCamera.client(cameraClientId);
-    if (!clientPointer || !(clientPointer->queueIsFull()))
-    {
-      break;
-    }
-    delay(1);
-  }
-
-  unsigned long startTime3 = millis();
-}
-
 void setUpPinModes()
 {
-  // Set up PWM
+  // Funkce pro nastavení režimů pinů
   ledcSetup(PWMLightChannel, PWMFreq, PWMResolution);
 
   for (int i = 0; i < motorPins.size(); i++)
@@ -552,40 +417,41 @@ void setUpPinModes()
     pinMode(motorPins[i].pinIN1, OUTPUT);
     pinMode(motorPins[i].pinIN2, OUTPUT);
   }
-  moveCar(STOP);
+  moveTank(STOP);
 
   pinMode(LIGHT_PIN, OUTPUT);
   ledcAttachPin(LIGHT_PIN, PWMLightChannel);
 }
 
-void setup(void)
+void setup(void) 
 {
+  // Inicializace sériové komunikace
   setUpPinModes();
   Serial.begin(115200);
 
+  // Nastavení přístupového bodu pro WiFi se 
   WiFi.softAP(ssid, password);
   IPAddress IP = WiFi.softAPIP();
   Serial.print("AP IP address: ");
   Serial.println(IP);
 
+//Nastavení a přiřazení eventů.
   server.on("/", HTTP_GET, handleRoot);
   server.onNotFound(handleNotFound);
-
+      
   wsCamera.onEvent(onCameraWebSocketEvent);
   server.addHandler(&wsCamera);
 
-  wsCarInput.onEvent(onCarInputWebSocketEvent);
-  server.addHandler(&wsCarInput);
+  wsTankInput.onEvent(onTankInputWebSocketEvent);
+  server.addHandler(&wsTankInput);
 
+// Inicializace serveru a spuštění kamery
   server.begin();
   Serial.println("HTTP server started");
-
   setupCamera();
 }
 
 void loop()
 {
-  wsCamera.cleanupClients();
-  wsCarInput.cleanupClients();
-  sendCameraPicture();
+  wsTankInput.cleanupClients();
 }

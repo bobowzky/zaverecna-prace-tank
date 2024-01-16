@@ -32,7 +32,7 @@ const int PWMLightChannel = 3;
 #define PCLK_GPIO_NUM     22
 
 // Nastavení jména a hesla pro mou síť.
-const char* ssid     = "TankWiFi";
+const char* ssid     = "Tank";
 const char* password = "boboTank14";
 
 //Vytvoření serveru na portu 80 a inicializace WebSocketu pro kameru
