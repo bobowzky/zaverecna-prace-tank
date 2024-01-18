@@ -156,7 +156,7 @@ openany
 		
 		\begin{figure}[ht]
 			\centering
-			\includegraphics[width=0.65\linewidth]{image/tank.jpg} 
+			\includegraphics[width=0.65\linewidth]{image/IMG_20240114_195803.jpg} 
 		\end{figure}
 		
 		\vspace{0.02 \textheight}
@@ -540,16 +540,32 @@ void moveTank(int inputValue)
     \section{Podoba hardwarového zařízení}
 \noindent Úplně nakonec jsem se zaměřil na vytvoření designu, který by skryl veškerou elektroniku uvnitř modelu tanku. Pro uzavření jsem vytvořil model horní části korby, poskytující funkční obal pro komponenty. Zdroj energie je umístěn v zadní části korby a prostřednictvím kabelů poskytuje napájení nepájivému poli. Zde je nainstalován H-můstek pro řízení motorů, a přes další soubor kabelů je propojena i deska ESP32 s kamerou. Ta je pevně připevněna ke přední části korby, umožňující snímání obrazu z kamery během pohybu tanku.
 
+	\begin{figure}[h]
+		\centering 
+		\includegraphics[width=0.9\textwidth]{image/tank.jpg} %
+		\caption{Podoba zapojených součástek} 
+	\end{figure}
+
+\newpage
 \noindent I když jsem spokojen s celkovým vzhledem a umístěním elektroniky, jsou věci které bych v budoucnu chtěl určitě změnit. Z časových důvodů jsem se bohužel nedostal k vymodelování a vytisknutí věže tanku, což bych chtěl ještě ovšem dořešit. Chtěl bych také efektivněji a přehledněji řešit zapojení všech elektrotechnických prvků, jelikož aktuální propojení všech komponentů je poměrně nepřehledné a neestetické. 
 
     
     \section{Podoba webové aplikace}
     
     Webová aplikace spolehlivě splňuje svůj účel, uživatelé se připojí a monhou tank bez problému ovládat pomocí 4 směrových tlačítek a sledovat při tom živý obraz z kamery tanku. Aplikace je také plně responzivní, lze ji proto používat i na mobilních telefonech nebo tabletech. Do budoucna bych si chtěl s celkový mvzhledem aplikace ještě pohrát a doladit některé nedostatky.
-	
+\vspace*{0.05\textheight}
+	\begin{figure}[h]
+		\centering 
+		\includegraphics[width=0.9\textwidth]{image/server.png} %
+		\caption{Webová aplikace} 
+	\end{figure}
+
+ 
 	\chapter*{Závěr}
 	
 Cílem projektu bylo vytvořit funkční tank na dálkové ovládání, který by byl ovládán buď pomocí webové aplikace nebo vlastního ovladače Většina cílů byla splněna a tank je nyní možné ovládat pomocí webové aplikace. Tvorbu vlastního ovladače, který by sloužil tanku jako alternativní možnost ovládání, jsem bohužel z časových důvodů již nestihl zrealizovat. Tuto myšlenku avšak nemám v plánu zahodit a do budoucna bych na ní chtěl určitě ještě zapracovat. Při vývoji mě nicméně napadl nespočet dalších možných změn, které by projekt vylepšily, jako například vymodelování věže a její následné zprovoznění, nebo také menší úpravy vzhledu webové aplikace. Na tato vylepšení bych se chtěl v budoucnu určitě také zaměřit. Celkově lze tedy říci, že tento projekt byl pro mě nejen technickou výzvou, ale i příležitostí k neustálému zdokonalování a rozšiřování mých znalostí.
+
+\noindent Odkaz na projekt: \url{https://github.com/bobowzky/zaverecna-prace-tank}
 	
 	%% literatura
 	\begin{thebibliography}{99}
